@@ -8,16 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
         }
-        
         .gradient-bg {
             background: linear-gradient(135deg, #082C66 0%, #33B3C1 50%, #F3D3C4 100%);
         }
-        
         .wave-shape {
             position: absolute;
             bottom: 0;
@@ -26,33 +23,111 @@
             overflow: hidden;
             line-height: 0;
         }
-        
         .wave-shape svg {
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
             height: 150px;
         }
-        
         .wave-shape .shape-fill {
-            fill: transparent;
+            fill: #082C66;
         }
-        
         .card-hover:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
         .team-member:hover .member-img {
             transform: scale(1.05);
         }
-        
         .member-img {
             transition: transform 0.3s ease;
         }
+        /* DARK MODE (apenas altera as cores no modo escuro) */
+        .dark body,
+        .dark .bg-gray-50 {
+            background-color: #181D2F !important;
+        }
+        .dark .bg-white {
+            background-color: #23243a !important;
+        }
+        .dark .text-gray-600, .dark .text-gray-700 {
+            color: #B6C3D1 !important;
+        }
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #181D2F 0%, #245B5B 50%, #25243A 100%) !important;
+        }
+        .dark .wave-shape .shape-fill {
+            fill: #181D2F !important;
+        }
+        .dark .bg-[#0a3a7a] {
+            background-color: #202a40 !important;
+        }
+        .dark .bg-[#082C66] {
+            background-color: #181D2F !important;
+        }
+        .dark .bg-[#33B3C1] {
+            background-color: #245B5B !important;
+        }
+        .dark .bg-[#F3D3C4] {
+            background-color: #25243A !important;
+        }
+        .dark .text-[#F3D3C4] {
+            color: #E0C3A9 !important;
+        }
+        .dark .text-[#33B3C1] {
+            color: #33B3C1 !important;
+        }
+        .dark .text-[#082C66] {
+            color: #B6C3D1 !important;
+        }
+        .dark .border-[#33B3C1] {
+            border-color: #245B5B !important;
+        }
+        .dark .bg-[#0a1a33] {
+            background-color: #181D2F !important;
+        }
+        .dark .text-white {
+            color: #EAF1F8 !important;
+        }
+        .dark input,
+        .dark textarea {
+            color: #EAF1F8 !important;
+            background-color: #202a40 !important;
+        }
+        .dark .shadow-lg,
+        .dark .rounded-xl {
+            box-shadow: 0 10px 30px -5px rgba(24,29,47, 0.8), 0 5px 15px -5px rgba(36,91,91, 0.4) !important;
+        }
+        .dark .border-t {
+            border-color: #25243A !important;
+        }
+        .dark .bg-[#2a96a3] {
+            background-color: #19747e !important;
+        }
+        .dark .hover\:bg-[#33B3C1]:hover {
+            background-color: #33B3C1 !important;
+        }
+        .dark .text-orange-400 {
+            color: #fb923c !important;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 transition-colors duration-500">
+    <!-- VLibras Widget -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <!-- Dark Mode Toggle Button -->
+    <button id="dark-mode-toggle" class="fixed top-20 right-5 z-50 bg-[#33B3C1] hover:bg-[#2a96a3] text-[#082C66] dark:bg-[#25243A] dark:text-[#33B3C1] rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition duration-300 focus:outline-none" aria-label="Alternar modo escuro">
+        <i id="dark-mode-icon" class="fas fa-moon text-2xl"></i>
+    </button>
     <!-- Header/Navbar -->
     <header class="fixed w-full z-50 bg-[#082C66] shadow-lg">
         <nav class="container mx-auto px-6 py-3">
@@ -62,20 +137,16 @@
                         <span class="text-[#33B3C1]">Tá</span> Ligado
                     </a>
                 </div>
-                
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Home</a>
                     <a href="#servicos" class="text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Serviços</a>
                     <a href="#sobre" class="text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Quem Somos</a>
                     <a href="#contato" class="text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Contato</a>
                 </div>
-                
                 <button class="md:hidden text-[#F3D3C4] focus:outline-none" id="menu-btn">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
-            
-            <!-- Mobile menu -->
             <div class="md:hidden hidden flex-col mt-4 space-y-4" id="mobile-menu">
                 <a href="#home" class="block text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Home</a>
                 <a href="#servicos" class="block text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">Serviços</a>
@@ -84,7 +155,6 @@
             </div>
         </nav>
     </header>
-
     <!-- Hero Section -->
     <section id="home" class="pt-32 pb-20 gradient-bg text-white relative overflow-hidden">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
@@ -104,18 +174,9 @@
                     </a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <img src="imagem9.jpeg" alt="Ilustração de conexão" class="w-full max-w-md animate-float">
-            </div>
-        </div>
-        
-        <div class="wave-shape">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
+            <div class="md:w-1/2 flex justify-center"></div>
         </div>
     </section>
-
     <!-- Serviços Section -->
     <section id="servicos" class="py-20 bg-white">
         <div class="container mx-auto px-6">
@@ -125,9 +186,8 @@
                     Oferecemos soluções completas para impulsionar seu negócio no mundo digital.
                 </p>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
+                <!-- Cards de serviços -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
                     <div class="p-6">
                         <div class="w-16 h-16 bg-[#082C66] rounded-full flex items-center justify-center mb-4">
@@ -140,20 +200,6 @@
                     </div>
                 </div>
                 
-                <!-- Card 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
-                    <div class="p-6">
-                        <div class="w-16 h-16 bg-[#33B3C1] rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-mobile-alt text-2xl text-[#F3D3C4]"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#082C66] mb-2">Aplicativos Mobile</h3>
-                        <p class="text-gray-600">
-                            Desenvolvimento de aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e alta performance.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Card 3 -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
                     <div class="p-6">
                         <div class="w-16 h-16 bg-[#082C66] rounded-full flex items-center justify-center mb-4">
@@ -165,8 +211,6 @@
                         </p>
                     </div>
                 </div>
-                
-                <!-- Card 4 -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
                     <div class="p-6">
                         <div class="w-16 h-16 bg-[#33B3C1] rounded-full flex items-center justify-center mb-4">
@@ -177,190 +221,146 @@
                             Criação de interfaces intuitivas e atraentes que melhoram a experiência do usuário e aumentam a conversão.
                         </p>
                     </div>
-                </div>
                 
-                <!-- Card 5 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
-                    <div class="p-6">
-                        <div class="w-16 h-16 bg-[#082C66] rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-cloud text-2xl text-[#F3D3C4]"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#082C66] mb-2">Cloud Solutions</h3>
-                        <p class="text-gray-600">
-                            Implementação de soluções em nuvem para escalabilidade, segurança e redução de custos na sua infraestrutura.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Card 6 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 card-hover">
-                    <div class="p-6">
-                        <div class="w-16 h-16 bg-[#33B3C1] rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-headset text-2xl text-[#F3D3C4]"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#082C66] mb-2">Suporte 24/7</h3>
-                        <p class="text-gray-600">
-                            Equipe especializada disponível para resolver qualquer problema e garantir o funcionamento contínuo dos seus sistemas.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-
     <!-- Quem Somos Section -->
     <section id="sobre" class="py-20 bg-[#F3D3C4]">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#082C66] mb-4">Quem <span class="text-[#33B3C1]">Somos</span></h2>
-                <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#082C66] mb-4">
+                    Quem <span class="text-[#33B3C1]">Somos</span>
+                </h2>
+                <p class="text-lg text-orange-400 dark:text-white font-semibold max-w-2xl mx-auto">
                     Uma equipe apaixonada por tecnologia e inovação, pronta para transformar suas ideias em realidade.
                 </p>
             </div>
-            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Member 1 -->
+                <!-- Membros da equipe -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem9.jpeg" alt="Paulo Sérgio" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Paulo Sérgio</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">CEO & Fundador</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Paulo Sérgio</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">progamador</p>
                         <p class="text-gray-600">
-                            Visionário e estrategista, lidera nossa equipe com mais de 15 anos de experiência no mercado digital.
+                            Progamador criativo e versátil, líder inovador que busca soluções inovadoras e inspira equipes.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://www.instagram.com/paulinsxr?igsh=ZW5vazNydzRyOGFz" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/paulinsxr?igsh=ZW5vazNydzRyOGFz" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            
                         </div>
                     </div>
                 </div>
-                
-                <!-- Member 2 -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem4.jpeg" alt="Pedro Henrique" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Pedro Henrique</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">CTO</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Pedro Henrique</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">Redator</p>
                         <p class="text-gray-600">
-                            Especialista em arquitetura de sistemas e desenvolvimento de software de alta complexidade.
+                            Redator e líder que cria textos envolventes e estratégicos, impulsionando projetos com visão e criatividade.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
-                           
                             </a>
-                           
-                                <a href="https://www.instagram.com/pdr.wx7_?igsh=Z2ZwaTdpdDU5OWg5" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/pdr.wx7_?igsh=Z2ZwaTdpdDU5OWg5" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Member 3 -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem8.jpeg" alt="Ryan De Jesus" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Ryan De Jesus</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">Desenvolvedor Sênior</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Ryan De Jesus</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">Progamador chef</p>
                         <p class="text-gray-600">
-                            Expert em JavaScript e frameworks modernos, com foco em performance e qualidade de código.
+                            Desenvolvedor de sites que cria plataformas eficientes e funcionais.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://www.instagram.com/ryan_svl_j?igsh=dzF0ZDh4dDYzeGJl" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/ryan_svl_j?igsh=dzF0ZDh4dDYzeGJl" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            
                         </div>
                     </div>
                 </div>
-                
-                <!-- Member 4 -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem2.jpeg" alt="Gabriel Felipe" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Gabriel Felipe</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">Designer UX/UI</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Gabriel Felipe</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">Programador</p>
                         <p class="text-gray-600">
-                            Criativo e detalhista, transforma conceitos em interfaces bonitas e funcionais que encantam os usuários.
+                            Programador detalhista que transforma ideias em códigos funcionais.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://www.instagram.com/g.sousa_07?igsh=OXM5cnFvbW12cTJm" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/g.sousa_07?igsh=OXM5cnFvbW12cTJm" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            
                         </div>
                     </div>
                 </div>
-                
-                <!-- Member 5 -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem5.jpeg" alt="Clara Soares" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Clara Soares</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">Gerente de Marketing</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Clara Soares</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">Social midia</p>
                         <p class="text-gray-600">
-                            Estrategista digital com expertise em campanhas de alto impacto e crescimento de marcas.
+                            Especialista em mìdia social que planeja conteúdo para engajar o público e aumentar a visibilidade da marca.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                           
-                            <a href="https://www.instagram.com/ups_cl4ra?igsh=cDI1OXB4MGJibmJ4" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/ups_cl4ra?igsh=cDI1OXB4MGJibmJ4" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Member 6 -->
                 <div class="team-member bg-white rounded-xl shadow-lg overflow-hidden transition duration-300">
                     <div class="h-48 bg-[#082C66] flex items-center justify-center">
                         <img src="imagem6.jpeg" alt="Davi Jesus" class="member-img w-32 h-32 rounded-full object-cover border-4 border-[#33B3C1]">
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[#082C66] mb-1">Davi Jesus</h3>
-                        <p class="text-[#33B3C1] font-medium mb-4">Desenvolvedor Mobile</p>
+                        <h3 class="text-xl font-bold text-orange-400 dark:text-[#33B3C1] mb-1">Davi Jesus</h3>
+                        <p class="text-[#33B3C1] font-medium mb-4">Social midia</p>
                         <p class="text-gray-600">
-                            Especialista em aplicativos nativos para iOS e Android, com foco em performance e experiência do usuário.
+                            Estrategista digital que analisa dados e transforma em insights.
                         </p>
                         <div class="flex justify-center mt-4 space-x-3">
-                            <a href="#" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="#" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://www.instagram.com/_odavizyn?igsh=a3M5b2tnaGRrYWI=" class="text-[#082C66] hover:text-[#33B3C1] transition duration-300">
+                            <a href="https://www.instagram.com/_odavizyn?igsh=a3M5b2tnaGRrYWI=" class="text-orange-400 dark:text-[#33B3C1] hover:text-[#33B3C1] transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Contato Section -->
     <section id="contato" class="py-20 bg-[#082C66] text-white">
         <div class="container mx-auto px-6">
@@ -370,7 +370,6 @@
                     Tem um projeto em mente ou quer saber mais sobre nossos serviços? Mande uma mensagem!
                 </p>
             </div>
-            
             <div class="flex flex-col lg:flex-row gap-10">
                 <div class="lg:w-1/2">
                     <form class="space-y-6">
@@ -397,11 +396,9 @@
                         </button>
                     </form>
                 </div>
-                
                 <div class="lg:w-1/2">
                     <div class="bg-[#0a3a7a] rounded-xl p-8 h-full">
                         <h3 class="text-2xl font-bold mb-6 text-[#33B3C1]">Informações de Contato</h3>
-                        
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="w-10 h-10 bg-[#33B3C1] rounded-full flex items-center justify-center text-[#082C66] mr-4 mt-1">
@@ -412,7 +409,6 @@
                                     <p class="text-[#F3D3C4]">Rua: Luís Baldinato, 09 - Jardim Sonia Regina, São Paulo - SP, 04935-100</p>
                                 </div>
                             </div>
-                            
                             <div class="flex items-start">
                                 <div class="w-10 h-10 bg-[#33B3C1] rounded-full flex items-center justify-center text-[#082C66] mr-4 mt-1">
                                     <i class="fas fa-phone-alt"></i>
@@ -422,7 +418,6 @@
                                     <p class="text-[#F3D3C4]">(11) 94915-8644<br>(11) 94032-7928</p>
                                 </div>
                             </div>
-                            
                             <div class="flex items-start">
                                 <div class="w-10 h-10 bg-[#33B3C1] rounded-full flex items-center justify-center text-[#082C66] mr-4 mt-1">
                                     <i class="fas fa-envelope"></i>
@@ -432,35 +427,21 @@
                                     <p class="text-[#F3D3C4]">Agenciataligado@gmail.com<br>pedrokosso15@gmail.com</p>
                                 </div>
                             </div>
-                            
                             <div class="flex items-start">
                                 <div class="w-10 h-10 bg-[#33B3C1] rounded-full flex items-center justify-center text-[#082C66] mr-4 mt-1">
                                     <i class="fas fa-clock"></i>
                                 </div>
-                                <div>
-                                    
-                                    
-                                </div>
+                                <div></div>
                             </div>
                         </div>
-                        
                         <div class="mt-8">
                             <h4 class="font-bold text-lg mb-4 text-[#33B3C1]">Nos siga nas redes sociais</h4>
                             <div class="flex space-x-4">
-                                
-                                    
-                                
-                                
-                                    
-                                
                                 <a href="https://www.instagram.com/agencia_.taligado?igsh=MWw2b2R4MmhicDNrNw==" class="w-10 h-10 bg-[#082C66] hover:bg-[#33B3C1] rounded-full flex items-center justify-center text-[#F3D3C4] transition duration-300">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                                 <a href="#" class="w-10 h-10 bg-[#082C66] hover:bg-[#33B3C1] rounded-full flex items-center justify-center text-[#F3D3C4] transition duration-300">
                                     <i class="fab fa-linkedin-in"></i>
-                                
-                                
-                                    
                                 </a>
                             </div>
                         </div>
@@ -469,7 +450,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="bg-[#0a1a33] text-[#F3D3C4] py-10">
         <div class="container mx-auto px-6">
@@ -480,7 +460,6 @@
                     </a>
                     <p class="mt-2 text-sm">Transformando ideias em realidade digital.</p>
                 </div>
-                
                 <div class="flex flex-col md:flex-row md:space-x-10 space-y-4 md:space-y-0">
                     <div>
                         <h4 class="font-bold text-lg mb-3 text-[#33B3C1]">Links Rápidos</h4>
@@ -491,17 +470,15 @@
                             <li><a href="#contato" class="hover:text-[#33B3C1] transition duration-300">Contato</a></li>
                         </ul>
                     </div>
-                    
                     <div>
                         <h4 class="font-bold text-lg mb-3 text-[#33B3C1]">Serviços</h4>
                         <ul class="space-y-2">
                             <li><a href="#" class="hover:text-[#33B3C1] transition duration-300">Desenvolvimento Web</a></li>
-                            <li><a href="#" class="hover:text-[#33B3C1] transition duration-300">Aplicativos Mobile</a></li>
+                            
                             <li><a href="#" class="hover:text-[#33B3C1] transition duration-300">Marketing Digital</a></li>
                             <li><a href="#" class="hover:text-[#33B3C1] transition duration-300">Design UX/UI</a></li>
                         </ul>
                     </div>
-                    
                     <div>
                         <h4 class="font-bold text-lg mb-3 text-[#33B3C1]">Legal</h4>
                         <ul class="space-y-2">
@@ -512,12 +489,9 @@
                     </div>
                 </div>
             </div>
-            
             <div class="border-t border-[#082C66] mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm mb-4 md:mb-0">© 2025 Tá Ligado. Todos os direitos reservados.</p>
                 <div class="flex space-x-6">
-                    
-                    
                     <a href="https://www.instagram.com/agencia_.taligado?igsh=MWw2b2R4MmhicDNrNw==" class="text-[#F3D3C4] hover:text-[#33B3C1] transition duration-300">
                         <i class="fab fa-instagram"></i>
                     </a>
@@ -528,25 +502,20 @@
             </div>
         </div>
     </footer>
-
     <!-- Back to Top Button -->
     <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-[#33B3C1] text-[#082C66] rounded-full shadow-lg flex items-center justify-center transition duration-300 opacity-0 invisible">
         <i class="fas fa-arrow-up"></i>
     </button>
-
     <script>
         // Mobile menu toggle
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
+        menuBtn && menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
         });
-        
         // Back to top button
         const backToTopBtn = document.getElementById('back-to-top');
-        
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
                 backToTopBtn.classList.remove('opacity-0', 'invisible');
@@ -556,28 +525,23 @@
                 backToTopBtn.classList.add('opacity-0', 'invisible');
             }
         });
-        
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
-        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
                     // Close mobile menu if open
                     if (!mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
@@ -585,6 +549,36 @@
                     }
                 }
             });
+        });
+        // Dark mode toggle
+        const darkToggle = document.getElementById('dark-mode-toggle');
+        const darkIcon = document.getElementById('dark-mode-icon');
+        const htmlEl = document.documentElement;
+        function setDarkMode(isDark) {
+            if(isDark) {
+                htmlEl.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                darkIcon.classList.remove('fa-moon');
+                darkIcon.classList.add('fa-sun');
+            } else {
+                htmlEl.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                darkIcon.classList.remove('fa-sun');
+                darkIcon.classList.add('fa-moon');
+            }
+        }
+        // Initial theme check
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if(theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                setDarkMode(true);
+            } else {
+                setDarkMode(false);
+            }
+        })();
+        darkToggle.addEventListener('click', () => {
+            const isDark = htmlEl.classList.contains('dark');
+            setDarkMode(!isDark);
         });
     </script>
 </body>
